@@ -1,0 +1,15 @@
+{
+  "name": "corner-florist-api",
+  "private": true,
+  "description": "Group bouquet API for The Corner Florist (Vercel function + Vercel Blob)",
+  "type": "module",
+  "scripts": {
+    "dev": "node dev.mjs"
+  },
+  "engines": {
+    "node": "22.x"
+  },
+  "dependencies": {
+    "@vercel/blob": "2.8.2"
+  }
+}
