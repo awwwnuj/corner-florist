@@ -8,7 +8,7 @@ Make a custom bouquet and send it to someone you love.
 
 **Netlify Drop**: drag this folder onto https://app.netlify.com/drop.
 
-If the address isn't `https://rupam870.github.io/corner-florist/`, replace that address in the `og:` / `twitter:` / `canonical` tags at the top of `index.html` (and in `gift/index.html` and `group/index.html`) so link previews show the picture.
+If the address isn't `https://awwwnuj.github.io/corner-florist/`, replace that address in the `og:` / `twitter:` / `canonical` tags at the top of `index.html` (and in `gift/index.html` and `group/index.html`) so link previews show the picture.
 
 ## Group bouquets
 
@@ -25,7 +25,7 @@ Unlike a regular gift, a group bouquet can't live inside the link, so it is kept
 - `server/api/group.js` is a Vercel function; `server/lib/group.js` has the rules (40 flowers max, names 24 characters, lines 120, only the organizer delivers, delivered bouquets are sealed).
 - Each record is its own JSON file in a private Vercel Blob store, so friends adding at the same moment never overwrite each other.
 - Live at `https://corner-florist-api.vercel.app/api/group` (project `corner-florist-api`, region `bom1`). `GROUP_API` near the top of `index.html` points at it.
-- Only `https://rupam870.github.io` may call it from a browser. To host the site somewhere else, set `ALLOWED_ORIGINS` (comma-separated) on the Vercel project.
+- Only `https://awwwnuj.github.io` and `https://rupam870.github.io` may call it from a browser (`ALLOWED_ORIGINS` on the Vercel project, comma-separated). Add any new address there before hosting the site somewhere else.
 - The project needs `BLOB_READ_WRITE_TOKEN` (added when the Blob store is connected) and `NODEJS_HELPERS=0` (the function reads its own request bodies).
 
 **Try it locally**: `cd server && npm install && node dev.mjs`, then open http://localhost:8787. It serves the site and an in-memory copy of the API together.

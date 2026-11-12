@@ -1,6 +1,6 @@
 // CORS and body parsing shared by the Vercel function and the local dev server.
 // The site posts JSON as text/plain, which browsers send without a preflight round trip.
-const ALLOWED = (process.env.ALLOWED_ORIGINS || 'https://rupam870.github.io').split(',').map(s => s.trim()).filter(Boolean);
+const ALLOWED = (process.env.ALLOWED_ORIGINS || 'https://awwwnuj.github.io,https://rupam870.github.io').split(',').map(s => s.trim()).filter(Boolean);
 const LOCAL = /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/;
 
 export function corsHeaders(origin) {
