@@ -32,12 +32,22 @@ Unlike a regular gift, a group bouquet can't live inside the link, so it is kept
 
 **Redeploy the API**: from `server/`, `npx vercel deploy --prod` (or connect the repo to the Vercel project with `server` as the root directory).
 
+## Sharing
+
+Every link people send (a gift, a group invite, a finished group bouquet) gets **WhatsApp**, **Instagram** and, on phones, **More** buttons.
+
+- WhatsApp opens with the message and link already typed: pick a chat and tap send.
+- Instagram doesn't let websites pre-fill messages, so its button copies the message and opens the Instagram inbox to paste it.
+- More opens the phone's share sheet; on a computer it's Copy.
+
+Whoever receives a bouquet gets **Share picture** on their phone. It sends the bouquet card to an Instagram Story, WhatsApp status or any chat, with a caption linking back here, and copies the site link for an Instagram link sticker. On a computer it saves the image instead.
+
 ## Count visits (Mixpanel)
 
 1. Create a free project at mixpanel.com and copy its Project Token.
 2. In `index.html`, set `const MIXPANEL_TOKEN = 'your-token';`
 3. Redeploy. Tracking stays off on localhost.
 
-Events: Page Viewed (role: sender / recipient), Occasion Started, First Stem Picked, Wrap Started, Wrap Completed, Note Chosen, Gift Link Created, Gift Shared (method: share / copy), Preview Opened, Gift Opened, Flowers Taken, Ribbon Untied, Flower Fact Viewed, Image Saved, Make One Back Clicked. Each gift link carries a `gift_id`, so you can see how many sent gifts got opened.
+Events: Page Viewed (role: sender / recipient), Occasion Started, First Stem Picked, Wrap Started, Wrap Completed, Note Chosen, Gift Link Created, Gift Shared (method: whatsapp / instagram / share / copy), Preview Opened, Gift Opened, Flowers Taken, Ribbon Untied, Flower Fact Viewed, Image Saved, Image Shared, Make One Back Clicked. Each gift link carries a `gift_id`, so you can see how many sent gifts got opened.
 
 Group bouquets add: Group Start Clicked (from: stall / gift / contributed / delivered / problem), Group Created, Group Viewed (role: organizer / friend), Group Flower Picked, Group Flower Added, Group Flower Removed, Group Invite Shared, Group Delivered, Group Result Shared, Group Note Viewed and Group Link Problem, all with a `group_id`. Page Viewed gets `group` and the roles `organizer` / `friend`; Gift Opened and Gift Shared get `group: true`. The viral loop to watch: invites shared per group, friends added per invite, and recipients who start one of their own.

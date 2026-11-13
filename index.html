@@ -123,16 +123,16 @@ body.touch-heads .bunch .hd{pointer-events:auto;cursor:pointer}
 .count{margin-top:6px;padding-top:6px;border-top:1px dashed var(--card-line);font-size:12.5px;line-height:1.3;color:var(--ink);font-variant-numeric:tabular-nums}
 .count b{font-family:var(--font-display);font-weight:400;font-size:16px;margin-right:2px}
 .count small{display:block;color:var(--ink-soft);font-size:11.5px}
-button.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:inherit;font-weight:600;font-size:14px;cursor:pointer;border-radius:6px;padding:11px 18px;border:1px solid rgba(90,64,36,.22);background:var(--card);color:var(--ink);pointer-events:auto;transition:background .15s, transform .15s;box-shadow:0 2px 0 rgba(90,64,36,.1),0 6px 14px rgba(60,40,20,.12)}
-button.btn:hover{background:#fff}
-button.btn .ic{width:17px;height:17px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-button.btn:active{transform:scale(.97)}
-button.btn:focus-visible{outline:2px solid #fff;outline-offset:2px;box-shadow:0 0 0 4px var(--stall)}
-button.btn.primary{background:var(--stall);color:#f6f1e6;border-color:transparent}
-button.btn.primary:hover{background:var(--stall-hover)}
-button.btn.ghost{box-shadow:none;background:transparent;border-color:rgba(90,64,36,.25)}
-button.btn.ghost:hover{background:rgba(255,255,255,.6)}
-button.btn:disabled{opacity:.5;cursor:default;transform:none}
+.btn{text-decoration:none;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;gap:8px;font:inherit;font-weight:600;font-size:14px;cursor:pointer;border-radius:6px;padding:11px 18px;border:1px solid rgba(90,64,36,.22);background:var(--card);color:var(--ink);pointer-events:auto;transition:background .15s, transform .15s;box-shadow:0 2px 0 rgba(90,64,36,.1),0 6px 14px rgba(60,40,20,.12)}
+.btn:hover{background:#fff}
+.btn .ic{width:17px;height:17px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.btn:active{transform:scale(.97)}
+.btn:focus-visible{outline:2px solid #fff;outline-offset:2px;box-shadow:0 0 0 4px var(--stall)}
+.btn.primary{background:var(--stall);color:#f6f1e6;border-color:transparent}
+.btn.primary:hover{background:var(--stall-hover)}
+.btn.ghost{box-shadow:none;background:transparent;border-color:rgba(90,64,36,.25)}
+.btn.ghost:hover{background:rgba(255,255,255,.6)}
+.btn:disabled{opacity:.5;cursor:default;transform:none}
 .toast{position:fixed;left:50%;top:22%;transform:translate(-50%,-50%);z-index:60;padding:9px 16px;font-family:var(--font-hand);font-size:22px;font-weight:700;opacity:0;transition:opacity .3s;pointer-events:none;text-align:center;max-width:calc(100% - 32px)}
 .toast.show{opacity:1}
 .drag-hint{position:absolute;left:50%;top:calc(42% - 20px);transform:translateX(-50%);padding:7px 13px;border-radius:999px;font-size:12px;display:none}
@@ -241,7 +241,7 @@ textarea.field{font-family:var(--font-hand);font-size:22px;line-height:1.15;min-
   .mean{grid-template-columns:1fr 1fr}
 }
 @media (prefers-reduced-motion:reduce){
-  .label,button.btn,.toast,.filler,.bunch .st,.bunch .ext{transition:none}
+  .label,.btn,.toast,.filler,.bunch .st,.bunch .ext{transition:none}
   .fade-in,.swing,.tap-hint.pulse,.loader .bloom{animation:none}
 }
 
@@ -290,6 +290,13 @@ details.gmanage summary{cursor:pointer;font-size:12.5px;color:var(--ink-soft)}
   .gpanel .notes .chip{flex:none;white-space:nowrap}
   .intro h2{font-size:38px}
 }
+
+/* share buttons: WhatsApp opens with the message typed; Instagram can't be pre-filled from a website */
+.sharerow{display:flex;gap:8px}
+.sharerow .btn{flex:1 1 0;min-width:0;padding:10px 8px;font-size:13px;gap:6px;white-space:nowrap;box-shadow:none}
+.btn.wa{background:#25d366;border-color:transparent;color:#05361a}
+.btn.wa:hover{background:#3fdc7c}
+.btn.ig .ic{color:#c13584}
 </style>
 </head>
 <body>
@@ -468,6 +475,8 @@ const ICON = {
   muted:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="m16 9 5 6"/><path d="m21 9-5 6"/></svg>',
   people:'<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.6"/><path d="M15.5 14.2A5 5 0 0 1 21 19"/></svg>',
   share:'<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"/><path d="m7 8 5-5 5 5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg>',
+  wa:'<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.6 20.4l1.3-4.1A8.6 8.6 0 1 1 8 19.3z"/><path d="M9.3 8.3c0 3.5 2.9 6.4 6.4 6.4l.9-1.7-1.9-.9-.9.9a4.4 4.4 0 0 1-2.7-2.7l.9-.9-.9-1.9z"/></svg>',
+  ig:'<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6"/></svg>',
 };
 
 // ---------- sound: soft, warm tones (synthesised, start on the first tap) ----------
@@ -987,6 +996,7 @@ function swatchRow(kind, items, current){
 }
 function renderStep(){
   const side = $('side');
+  if(step !== 'gift-open') cardBlobP = null;
   if(step !== 'gift-open') side.classList.remove('sheet','expanded');
   side.classList.remove('fade-in'); void side.offsetWidth; side.classList.add('fade-in');
   showHint(null);
@@ -1015,7 +1025,8 @@ function renderStep(){
       <div class="two"><div><label for="toField">To</label><input class="field" id="toField" maxlength="24" autocomplete="off" ${done ? 'readonly' : ''}></div>
       <div><label for="fromField">Signed</label><input class="field" id="fromField" maxlength="24" autocomplete="off" ${done ? 'readonly' : ''}></div></div>
       <p class="small">${done ? `Only people with this link can open it. Send it to ${esc(G.delivered.to)}, and show the group what you made together.` : 'Every flower carries its own note from whoever picked it. Once you deliver, the bouquet is sealed and nobody else can add one.'}</p>
-      <div class="acts">${done ? `<button class="btn primary" type="button" id="gSend">${ICON.share}Send to ${esc(G.delivered.to)}</button><button class="btn" type="button" id="gShow">${ICON.people}Show the group</button>` : `<button class="btn primary" type="button" id="gDeliver">${ICON.flower}Deliver it</button>`}<button class="btn" type="button" id="previewBtn">${ICON.eye}See what they’ll see</button></div>
+      ${done ? shareRow('gSendRow', 'Send it to ' + G.delivered.to) + shareRow('gShowRow', 'Show the group') : ''}
+      <div class="acts">${done ? '' : `<button class="btn primary" type="button" id="gDeliver">${ICON.flower}Deliver it</button>`}<button class="btn" type="button" id="previewBtn">${ICON.eye}See what they’ll see</button></div>
       <div class="linkbox" id="linkbox" ${done ? '' : 'hidden'}><input id="linkField" readonly aria-label="Gift link"><button class="btn primary" type="button" id="copyBtn">${ICON.copy}Copy</button></div>
       <div class="acts"><button class="btn ghost" type="button" id="backBtn">${ICON.back}Back to the stall</button></div>`;
     const f = $('fromField'), t = $('toField');
@@ -1024,10 +1035,7 @@ function renderStep(){
       f.oninput = ()=>{ tagData.from = f.value.trim(); paintTag(); };
       t.oninput = ()=>{ tagData.to = t.value.trim(); paintTag(); };
       $('gDeliver').onclick = deliverGroup;
-    } else {
-      $('gSend').onclick = sendGroupGift;
-      $('gShow').onclick = showGroupResult;
-    }
+    } else wireGroupShares();
     $('copyBtn').onclick = ()=>{ copyText(link, 'Gift link copied'); track('Gift Shared', {method:'copy', group_id: G.id, group: true}); };
     $('previewBtn').onclick = ()=>{ track('Preview Opened', {stems: hand.length, group: true}); openGiftView(groupGift(), true); };
     $('backBtn').onclick = ()=> closeRoom(true);
@@ -1042,23 +1050,25 @@ function renderStep(){
       <div class="group"><label for="noteField">Little note</label><textarea class="field" id="noteField" maxlength="140" placeholder="Write something, or pick one below"></textarea>
       <div class="notes" id="noteChips"></div></div>
       <div class="acts"><button class="btn primary" type="button" id="giftBtn">${ICON.link}Send gift</button><button class="btn" type="button" id="previewBtn">${ICON.eye}See what they\u2019ll see</button></div>
-      <div class="linkbox" id="linkbox" hidden><input id="linkField" readonly aria-label="Gift link"><button class="btn primary" type="button" id="copyBtn">${ICON.copy}Copy</button></div>
-      <p class="small" id="linkNote" hidden>Your note travels inside the link, so anyone with the link can read it.</p>
+      <div class="group" id="sendBox" hidden>${shareRow('giftShare', 'Send it on')}
+      <div class="linkbox" id="linkbox"><input id="linkField" readonly aria-label="Gift link"><button class="btn primary" type="button" id="copyBtn">${ICON.copy}Copy</button></div>
+      <p class="small" id="linkNote">Your note travels inside the link, so anyone with the link can read it.</p></div>
       <div class="acts"><button class="btn ghost" type="button" id="backBtn">${ICON.back}Back to the stall</button><button class="btn ghost" type="button" id="newBtn">${ICON.restart}Start over</button></div>`;
     const f = $('fromField'), t = $('toField'), n = $('noteField');
     f.value = tagData.from; t.value = tagData.to; n.value = tagData.note;
-    f.oninput = ()=>{ tagData.from = f.value.trim(); store.set('cf-from', tagData.from); paintTag(); };
-    t.oninput = ()=>{ tagData.to = t.value.trim(); paintTag(); };
-    n.oninput = ()=>{ tagData.note = n.value; };
+    const stale = ()=>{ $('sendBox').hidden = true; };
+    f.oninput = ()=>{ tagData.from = f.value.trim(); store.set('cf-from', tagData.from); paintTag(); stale(); };
+    t.oninput = ()=>{ tagData.to = t.value.trim(); paintTag(); stale(); };
+    n.oninput = ()=>{ tagData.note = n.value; stale(); };
     const paintNotes = ()=>{
       $('whoChips').querySelectorAll('.chip').forEach(c=> c.setAttribute('aria-pressed', c.dataset.who === forWho ? 'true' : 'false'));
       $('noteChips').innerHTML = NOTES[forWho].notes.map(x=>`<button class="chip" type="button">${esc(x)}</button>`).join('');
-      $('noteChips').querySelectorAll('.chip').forEach(c=> c.onclick = (ev)=>{ n.value = tagData.note = c.textContent; Sound.pick(); track('Note Chosen', {relationship: forWho, preset: [...c.parentNode.children].indexOf(c)}); });
+      $('noteChips').querySelectorAll('.chip').forEach(c=> c.onclick = (ev)=>{ n.value = tagData.note = c.textContent; stale(); Sound.pick(); track('Note Chosen', {relationship: forWho, preset: [...c.parentNode.children].indexOf(c)}); });
     };
     $('whoChips').querySelectorAll('.chip').forEach(c=> c.onclick = ()=>{
       const prevTo = NOTES[forWho].to; forWho = c.dataset.who; store.set('cf-who', forWho);
       const nt = NOTES[forWho].to;
-      if(!t.value.trim() || t.value.trim() === prevTo){ t.value = nt; tagData.to = nt; paintTag(); }
+      if(!t.value.trim() || t.value.trim() === prevTo){ t.value = nt; tagData.to = nt; paintTag(); stale(); }
       paintNotes(); Sound.pick();
     });
     paintNotes();
@@ -1088,7 +1098,7 @@ function renderStep(){
     side.innerHTML = `${phone ? `<button class="handle" type="button" id="sheetHandle" aria-expanded="false">Read every note</button>` : ''}
       <div class="eyebrow">From ${esc(g.from || 'your friends')}</div>
       <p class="hero-note solo">${notes.length > 1 ? `${notes.length} friends each picked a flower for you.` : first ? `${esc(first.who)} picked ${esc(aFlower(first.type))} for you.` : 'A bouquet, just for you.'}</p>
-      <div class="acts">${g.preview ? `<button class="btn" type="button" id="editBtn">${ICON.back}Back to editing</button>` : ''}<button class="btn primary" type="button" id="saveBtn">${ICON.save}Save as image</button>${g.preview ? '' : `<button class="btn" type="button" id="gStartBack">${ICON.people}Start one for someone</button>`}</div>
+      <div class="acts">${g.preview ? `<button class="btn" type="button" id="editBtn">${ICON.back}Back to editing</button>` : ''}<button class="btn primary" type="button" id="saveBtn">${saveLabel()}</button>${g.preview ? '' : `<button class="btn" type="button" id="gStartBack">${ICON.people}Start one for someone</button>`}</div>${shareHint()}
       <p class="small">Tap any flower to see who picked it.</p>
       <ul class="msgs">${notes.map(st=>`<li tabindex="0" role="button" data-sid="${esc(st.sid)}">${thumbHTML(st.type, 34)}<div>${st.line ? `<q>${esc(st.line)}</q><cite>— ${esc(st.who)}</cite>` : `<cite>${esc(st.who)} picked ${esc(aFlower(st.type))}</cite>`}</div></li>`).join('')}</ul>`;
     if(phone){
@@ -1097,7 +1107,7 @@ function renderStep(){
     }
     if(g.preview) $('editBtn').onclick = backToEditing;
     else $('gStartBack').onclick = ()=>{ pendingTo = ''; clearHash(); closeRoom(false); startGroupCreate('gift'); };
-    $('saveBtn').onclick = saveImage;
+    $('saveBtn').onclick = saveImage; primeCard();
     side.querySelectorAll('.msgs li').forEach(li=>{ const go = ()=>{ if(side.classList.contains('expanded')) $('sheetHandle').click(); const st = hand.find(h=> h.sid === li.dataset.sid); if(st) setTimeout(()=> showMeaning(st), side.classList.contains('sheet') ? 300 : 0); }; li.onclick = go; li.onkeydown = e=>{ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); go(); } }; });
     requestAnimationFrame(()=> applyPose(openPose(hand.length), 900));
   } else if(step === 'gift-open'){
@@ -1109,7 +1119,7 @@ function renderStep(){
       <div class="eyebrow">From ${esc(who)}</div>
       ${g.note ? `<blockquote class="hero-note">${esc(g.note)}${g.from ? `<cite>\u2014 ${esc(g.from)}</cite>` : ''}</blockquote>` : ''}
       <p class="${g.note ? 'warm' : 'hero-note solo'}">${esc(warmLine(g))}</p>
-      <div class="acts">${g.preview ? `<button class="btn primary" type="button" id="editBtn">${ICON.back}Back to editing</button>` : `<button class="btn primary" type="button" id="backOne">${ICON.flower}Make one for ${esc(g.from || 'someone')}</button>`}<button class="btn" type="button" id="saveBtn">${ICON.save}Save as image</button></div>
+      <div class="acts">${g.preview ? `<button class="btn primary" type="button" id="editBtn">${ICON.back}Back to editing</button>` : `<button class="btn primary" type="button" id="backOne">${ICON.flower}Make one for ${esc(g.from || 'someone')}</button>`}<button class="btn" type="button" id="saveBtn">${saveLabel()}</button></div>${shareHint()}
       <div class="group"><div class="eyebrow">What your flowers say</div>
       <ul class="mean">${present.map(t=>`<li tabindex="0" role="button" data-t="${t}">${thumbHTML(t, 34)}<span><b>${esc(STEMS[t].name)}</b>${esc(STEMS[t].means)}</span></li>`).join('')}</ul></div>`;
     if(phone){
@@ -1118,7 +1128,7 @@ function renderStep(){
     }
     if(g.preview) $('editBtn').onclick = backToEditing;
     else $('backOne').onclick = ()=>{ track('Make One Back Clicked', {gift_id: g.id || ''}); pendingTo = g.from || ''; clearHash(); closeRoom(false); };
-    $('saveBtn').onclick = saveImage;
+    $('saveBtn').onclick = saveImage; primeCard();
     side.querySelectorAll('.mean li').forEach(li=>{ const go = ()=>{ if(side.classList.contains('expanded')) $('sheetHandle').click(); const st = hand.find(h=> h.type === li.dataset.t); if(st) setTimeout(()=> showMeaning(st), side.classList.contains('sheet') ? 300 : 0); }; li.onclick = go; li.onkeydown = e=>{ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); go(); } }; });
     requestAnimationFrame(()=> applyPose(openPose(hand.length), 900));
   }
@@ -1365,16 +1375,34 @@ function giftLink(){
   track('Gift Link Created', lastGiftProps);
   return BASE + '#g.' + paper + ribbon + SEED.toString(36) + hand.map(stemCode).join('') + '.' + b64u(g.to) + '.' + b64u(g.note) + '.' + b64u(g.from) + '.' + giftId;
 }
-async function sendGift(){
+function sendGift(){
   const link = giftLink(), g = currentGift();
-  $('linkField').value = link; $('linkbox').hidden = false; $('linkNote').hidden = false;
+  $('linkField').value = link; $('sendBox').hidden = false;
   const data = {title: 'Flowers for ' + (g.to || 'you'), text: (g.from ? g.from + ' made' : 'Someone made') + ' you a little bouquet \u{1F490}', url: link};
-  if(navigator.share && matchMedia('(pointer:coarse)').matches){
-    try{ await navigator.share(data); track('Gift Shared', Object.assign({method:'share'}, lastGiftProps)); toast('Sent'); return; }
-    catch(err){ if(err && err.name === 'AbortError') return; }
-  }
-  copy(link);
-  track('Gift Shared', Object.assign({method:'copy'}, lastGiftProps));
+  wireShare('giftShare', ()=> data, m=> track('Gift Shared', Object.assign({method: m}, lastGiftProps)));
+  if(!touchShare()){ copy(link); track('Gift Shared', Object.assign({method:'copy'}, lastGiftProps)); }
+  setTimeout(()=>{ try{ $('sendBox').scrollIntoView({block:'nearest', behavior: reduce ? 'auto' : 'smooth'}); }catch(e){} }, 60);
+}
+// ---------- share buttons ----------
+// WhatsApp opens with the message already typed (pick a chat, tap send). Instagram can't be pre-filled from a website,
+// so its button copies the message and opens the Instagram inbox. "More" is the phone's own share sheet.
+const touchShare = ()=> !!navigator.share && matchMedia('(pointer:coarse)').matches;
+function shareRow(id, label, {copy: withCopy = false} = {}){
+  const third = touchShare() ? `<button class="btn" type="button" data-s="more">${ICON.share}More</button>` : withCopy ? `<button class="btn" type="button" data-s="more">${ICON.copy}Copy</button>` : '';
+  return `<div class="group" id="${id}">${label ? `<div class="eyebrow">${esc(label)}</div>` : ''}<div class="sharerow">
+    <a class="btn wa" data-s="whatsapp" href="https://wa.me/" target="_blank" rel="noopener">${ICON.wa}WhatsApp</a>
+    <a class="btn ig" data-s="instagram" href="https://www.instagram.com/direct/inbox/" target="_blank" rel="noopener">${ICON.ig}Instagram</a>${third}</div></div>`;
+}
+// get() returns {title, text, url}; done(method) runs after each share for tracking
+function wireShare(id, get, done){
+  const el = $(id); if(!el) return;
+  const wa = el.querySelector('[data-s=whatsapp]'), ig = el.querySelector('[data-s=instagram]'), more = el.querySelector('[data-s=more]');
+  const msg = d => d.text + '\n' + d.url;
+  const refresh = ()=>{ const d = get(); if(d) wa.href = 'https://wa.me/?text=' + encodeURIComponent(msg(d)); };
+  refresh();
+  wa.onclick = ()=>{ refresh(); done('whatsapp'); };
+  ig.onclick = ()=>{ const d = get(); if(!d) return; copyText(msg(d), 'Message copied. Paste it in an Instagram chat'); done('instagram'); };
+  if(more) more.onclick = async ()=>{ const d = get(); if(!d) return; const m = await shareOrCopy(d, 'Link copied'); if(m) done(m); };
 }
 function readGift(){
   const h = (location.hash || '').slice(1);
@@ -1560,18 +1588,21 @@ function renderGroupPanel(repose = true){
       <p class="small">Changed your mind? Tap another bucket to swap.</p>`;
   } else if(org && G.delivered){
     h += `<h3>Delivered to ${esc(G.delivered.to)}.</h3><p>${flowers} from ${esc(fromLine(names))}.</p>
-      <div class="acts"><button class="btn primary" type="button" id="gSend">${ICON.share}Send to ${esc(G.delivered.to)}</button><button class="btn" type="button" id="gShow">${ICON.people}Show the group</button></div>
+      ${shareRow('gSendRow', 'Send it to ' + G.delivered.to, {copy: true})}
+      ${shareRow('gShowRow', 'Show the group', {copy: true})}
       <button class="linkish" type="button" id="gNew">${ICON.people}Start another group bouquet</button>`;
   } else if(org){
     h += `<h3>${n ? `${flowers} so far` : 'Your link is ready'}</h3>
       <p>${n ? `From ${esc(fromLine(names))}.` : `Share it in your group chat. Everyone picks a flower and writes ${to} a line.`}${mine ? '' : ' Tap a bucket to add your own.'}</p>
-      <div class="acts"><button class="btn ${n ? '' : 'primary'}" type="button" id="gInvite">${ICON.share}Invite friends</button><button class="btn ${n ? 'primary' : ''}" type="button" id="gWrap" ${n ? '' : 'disabled'}>${ICON.wrap}Wrap &amp; deliver</button></div>
+      ${shareRow('gInviteRow', 'Invite friends', {copy: true})}
+      <div class="acts"><button class="btn ${n ? 'primary' : ''}" type="button" id="gWrap" ${n ? '' : 'disabled'}>${ICON.wrap}Wrap &amp; deliver</button></div>
       ${n ? `<details class="gmanage"><summary>See every flower and note</summary><ul class="glist">${G.stems.map(s=>`<li>${thumbHTML(s.type, 30)}<span class="gt"><b>${esc(s.name)}</b><i>${esc(s.line || aFlower(s.type))}</i></span><button type="button" data-rm="${esc(s.sid)}">Remove</button></li>`).join('')}</ul></details>` : ''}
       <p class="small">This page is your organizer link. <button class="linkish" type="button" id="gAdmin">Copy it</button> to finish on another device.</p>`;
   } else if(mine){
     h += `<h3>Your ${esc(STEMS[mine.type].name.toLowerCase())} is in the bouquet.</h3>
       <p>${flowers} so far. ${esc(G.from)} will wrap it up and send it to ${to}.</p>
-      <div class="acts"><button class="btn primary" type="button" id="gInvite">${ICON.share}Invite more friends</button><button class="btn" type="button" id="gNew">${ICON.people}Start one for someone</button></div>
+      ${shareRow('gInviteRow', 'Invite more friends', {copy: true})}
+      <div class="acts"><button class="btn" type="button" id="gNew">${ICON.people}Start one for someone</button></div>
       <button class="linkish" type="button" id="gUndo">Take my flower back</button>`;
   } else {
     h += `<h3>Pull one flower for ${to}.</h3>
@@ -1589,7 +1620,7 @@ function renderGroupPanel(repose = true){
     on('gPut', ()=>{ if(myStem) removeStem(myStem); });
     if(innerWidth >= 760) setTimeout(()=>{ try{ (nm.value ? ln : nm).focus({preventScroll:true}); }catch(e){} }, 350);
   }
-  on('gInvite', shareInvite); on('gWrap', groupWrap); on('gSend', sendGroupGift); on('gShow', showGroupResult);
+  on('gWrap', groupWrap); wireGroupShares();
   on('gNew', ()=>{ leaveGroup(); startGroupCreate(org ? 'delivered' : 'contributed'); });
   on('gUndo', undoMine);
   on('gAdmin', ()=> copyText(organizerLink(grp.id, grp.key), 'Organizer link copied'));
@@ -1676,11 +1707,15 @@ async function removeFromGroup(sid){
     mergeGroup(d.group, false);
   } catch(err){ toast(err.message, 3600); } finally { grpBusy = false; }
 }
-async function shareInvite(){
+function inviteShare(){
   const G = grp.G;
-  const text = `${grp.role === 'organizer' ? 'I’m' : 'We’re'} putting together a bouquet for ${G.to} \u{1F490} Pick a flower and write ${G.to} a line. It takes a minute:`;
-  const method = await shareOrCopy({title: 'A bouquet for ' + G.to, text, url: inviteLink(G.id)}, 'Invite copied. Paste it in your group chat');
-  if(method) track('Group Invite Shared', {group_id: G.id, method, role: grp.role, stems: G.stems.length});
+  return {title: 'A bouquet for ' + G.to, text: `${grp.role === 'organizer' ? 'I’m' : 'We’re'} putting together a bouquet for ${G.to} \u{1F490} Pick a flower and write ${G.to} a line. It takes a minute:`, url: inviteLink(G.id)};
+}
+function wireGroupShares(){
+  if(!grp) return;
+  wireShare('gInviteRow', inviteShare, m=> track('Group Invite Shared', {group_id: grp.id, method: m, role: grp.role, stems: grp.G.stems.length}));
+  wireShare('gSendRow', groupGiftShare, m=> track('Gift Shared', {method: m, group_id: grp.id, group: true}));
+  wireShare('gShowRow', groupResultShare, m=> track('Group Result Shared', {method: m, group_id: grp.id}));
 }
 
 // ---- wrapping and sending it
@@ -1705,19 +1740,17 @@ async function deliverGroup(){
     track('Group Delivered', {group_id: grp.id, stems: d.group.stems.length, friends: grpNames(d.group).length, paper, ribbon});
     Sound.chime(); buzz([10,40,10]);
     renderStep();
-    sendGroupGift();
+    if(touchShare()) toast('Delivered. Now send it'); else copyText(groupGiftLink(grp.id), 'Delivered. Gift link copied');
   } catch(err){ toast(err.message, 3600); if(btn.isConnected) btn.disabled = false; }
   finally { grpBusy = false; }
 }
-async function sendGroupGift(){
-  const G = grp.G, dl = G.delivered; if(!dl) return;
-  const method = await shareOrCopy({title: 'Flowers for ' + dl.to, text: `${dl.sign} made you a bouquet \u{1F490}`, url: groupGiftLink(G.id)}, 'Gift link copied');
-  if(method) track('Gift Shared', {method, group_id: G.id, group: true});
+function groupGiftShare(){
+  const dl = grp && grp.G.delivered;
+  return dl && {title: 'Flowers for ' + dl.to, text: `${dl.sign} made you a bouquet \u{1F490}`, url: groupGiftLink(grp.id)};
 }
-async function showGroupResult(){
-  const G = grp.G, dl = G.delivered; if(!dl) return;
-  const method = await shareOrCopy({title: 'Our bouquet for ' + dl.to, text: `Done! Here’s the bouquet we made for ${dl.to} \u{1F490} Tap a flower to see your note:`, url: groupGiftLink(G.id)}, 'Link copied. Paste it in the group chat');
-  if(method) track('Group Result Shared', {method, group_id: G.id});
+function groupResultShare(){
+  const dl = grp && grp.G.delivered;
+  return dl && {title: 'Our bouquet for ' + dl.to, text: `Done! Here’s the bouquet we made for ${dl.to} \u{1F490} Tap a flower to see your note:`, url: groupGiftLink(grp.id)};
 }
 
 // ---- opening a link
@@ -1865,15 +1898,22 @@ async function renderCard(){
   g.font = '500 24px Figtree'; g.globalAlpha = .65; g.fillText('The Corner Florist', W/2, H - 50); g.globalAlpha = 1;
   return c;
 }
+// the picture is drawn a moment after the bouquet opens, so tapping Share can open the phone's share sheet straight away
+// (phones only allow it right after a tap, and drawing the picture takes a moment)
+let cardBlobP = null;
+function primeCard(){ cardBlobP = null; setTimeout(()=>{ if(step === 'gift-open' && !cardBlobP) cardBlobP = renderCard().then(c=> new Promise(r=> c.toBlob(r, 'image/png'))); }, 1300); }
+const saveLabel = ()=> touchShare() ? ICON.share + 'Share picture' : ICON.save + 'Save as image';
+const shareHint = ()=> touchShare() ? '<p class="small">Post it to your Instagram Story or WhatsApp status, or send it to a chat.</p>' : '';
 let dlP = null;
 function downloadsCap(){ if(!dlP) dlP = (window.claude && window.claude.use) ? window.claude.use('downloads').catch(()=>null) : Promise.resolve(null); return dlP; }
 downloadsCap();
 async function saveImage(){
   const btn = $('saveBtn'); if(btn) btn.disabled = true;
+  const v = viewing || currentGift(), sharing = touchShare();
+  // on a phone, put the site's address on the clipboard too (it has to happen inside the tap), ready for an Instagram link sticker
+  if(sharing){ try{ navigator.clipboard.writeText(ROOT).catch(()=>{}); }catch(e){} }
   try{
-    const c = await renderCard();
-    const blob = await new Promise(r=> c.toBlob(r, 'image/png'));
-    const v = viewing || currentGift();
+    const blob = await (cardBlobP || (cardBlobP = renderCard().then(c=> new Promise(r=> c.toBlob(r, 'image/png')))));
     const name = 'bouquet' + (v.to ? '-for-' + v.to.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'') : '') + '.png';
     const dl = await downloadsCap();
     track('Image Saved', {gift_id: (viewing && viewing.id) || ''});
@@ -1883,7 +1923,9 @@ async function saveImage(){
     }
     const file = (typeof File === 'function') ? new File([blob], name, {type:'image/png'}) : null;
     if(file && navigator.canShare && matchMedia('(pointer:coarse)').matches && navigator.canShare({files:[file]})){
-      try{ await navigator.share({files:[file], title:'My bouquet'}); return; }
+      const caption = (v.group ? 'My friends made me a bouquet' : (v.from ? v.from + ' made me a bouquet' : 'Someone made me a bouquet')) + ' \u{1F490} Make one for someone: ' + ROOT;
+      const data = navigator.canShare({files:[file], text: caption}) ? {files:[file], text: caption} : {files:[file]};
+      try{ await navigator.share(data); track('Image Shared', {gift_id: (viewing && viewing.id) || '', group: !!v.group}); if(sharing) toast('Site link copied, for a link sticker', 2600); return; }
       catch(err){ if(err && err.name === 'AbortError') return; }
     }
     if(!matchMedia('(pointer:coarse)').matches){
