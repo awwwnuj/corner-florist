@@ -41,7 +41,3 @@ Unlike a regular gift, a group bouquet can't live inside the link, so it is kept
 Events: Page Viewed (role: sender / recipient), Occasion Started, First Stem Picked, Wrap Started, Wrap Completed, Note Chosen, Gift Link Created, Gift Shared (method: share / copy), Preview Opened, Gift Opened, Flowers Taken, Ribbon Untied, Flower Fact Viewed, Image Saved, Make One Back Clicked. Each gift link carries a `gift_id`, so you can see how many sent gifts got opened.
 
 Group bouquets add: Group Start Clicked (from: stall / gift / contributed / delivered / problem), Group Created, Group Viewed (role: organizer / friend), Group Flower Picked, Group Flower Added, Group Flower Removed, Group Invite Shared, Group Delivered, Group Result Shared, Group Note Viewed and Group Link Problem, all with a `group_id`. Page Viewed gets `group` and the roles `organizer` / `friend`; Gift Opened and Gift Shared get `group: true`. The viral loop to watch: invites shared per group, friends added per invite, and recipients who start one of their own.
-
-## Credit
-
-`const MAKER = {name:'Rupam', url:''}` near the top of the script. Add a URL to make the name a link.

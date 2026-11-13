@@ -244,8 +244,6 @@ textarea.field{font-family:var(--font-hand);font-size:22px;line-height:1.15;min-
   .label,button.btn,.toast,.filler,.bunch .st,.bunch .ext{transition:none}
   .fade-in,.swing,.tap-hint.pulse,.loader .bloom{animation:none}
 }
-.invite .maker{margin:12px 0 0;font-size:12px;color:var(--ink-soft);opacity:.8;text-align:center}
-.invite .maker a{color:inherit}
 
 /* group bouquets: one link, every friend adds a flower and a line */
 .gstart{display:inline-flex;align-items:center;gap:8px;margin-top:12px;font:inherit;font-size:13.5px;font-weight:600;padding:8px 14px;border-radius:999px;border:1px dashed rgba(76,106,68,.6);background:rgba(76,106,68,.08);color:var(--stall);cursor:pointer}
@@ -327,7 +325,6 @@ details.gmanage summary{cursor:pointer;font-size:12.5px;color:var(--ink-soft)}
     <div class="chips" id="occasions"></div>
     <button class="gstart" type="button" id="groupStart"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.6"/><path d="M15.5 14.2A5 5 0 0 1 21 19"/></svg>Group bouquet: everyone adds a flower<em>New</em></button>
     <button class="gresume" type="button" id="groupResume" hidden></button>
-    <p class="maker" id="maker"></p>
   </div>
   <div class="panel gpanel" id="gpanel" hidden></div>
   <div class="bottom" id="bottom" hidden>
@@ -358,8 +355,6 @@ const BASE = ROOT + 'gift/';
 const GROUP_API = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? location.origin + '/api/group' : 'https://corner-florist-api.vercel.app/api/group';
 // Paste your Mixpanel project token here to count visits and see the funnel. Empty = no tracking at all.
 const MIXPANEL_TOKEN = '36ccc38ed07f125c59f57b6aec4a0550';
-const MAKER = {name:'Rupam', url:''};
-{ const mk = document.getElementById('maker'); if(mk) mk.innerHTML = 'Made with care by ' + (MAKER.url ? '<a href="' + MAKER.url + '" target="_blank" rel="noopener">' + MAKER.name + '</a>' : MAKER.name); }
 
 // ---------- tracking ----------
 let trackOn = false;
