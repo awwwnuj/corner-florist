@@ -40,6 +40,11 @@ Every link people send (a gift, a group invite, a finished group bouquet) gets *
 - Instagram doesn't let websites pre-fill messages, so its button copies the message and opens the Instagram inbox to paste it.
 - More opens the phone's share sheet; on a computer it's Copy.
 
+When a bouquet is finished, there are two ways to share it:
+
+- **Send it to them**: the WhatsApp, Instagram and More buttons above, with the gift link.
+- **Post it on your Story**: an optional "their Instagram" box, then **Post to Instagram Story**. It makes a Story-sized picture of the wrapped bouquet and its tag, with your note (a group bouquet leaves its private notes out), copies `@their_handle`, and opens the phone's share sheet. Pick Instagram, then Story, and paste the handle into a mention sticker to tag them. A website can't add the tag inside Instagram itself. On a computer the button saves the picture instead.
+
 Whoever receives a bouquet gets **Share picture** on their phone. It sends the bouquet card to an Instagram Story, WhatsApp status or any chat, with a caption linking back here, and copies the site link for an Instagram link sticker. On a computer it saves the image instead.
 
 ## Count visits (Mixpanel)
@@ -48,6 +53,6 @@ Whoever receives a bouquet gets **Share picture** on their phone. It sends the b
 2. In `index.html`, set `const MIXPANEL_TOKEN = 'your-token';`
 3. Redeploy. Tracking stays off on localhost.
 
-Events: Page Viewed (role: sender / recipient), Occasion Started, First Stem Picked, Wrap Started, Wrap Completed, Note Chosen, Gift Link Created, Gift Shared (method: whatsapp / instagram / share / copy), Preview Opened, Gift Opened, Flowers Taken, Ribbon Untied, Flower Fact Viewed, Image Saved, Image Shared, Make One Back Clicked. Each gift link carries a `gift_id`, so you can see how many sent gifts got opened.
+Events: Page Viewed (role: sender / recipient), Occasion Started, First Stem Picked, Wrap Started, Wrap Completed, Note Chosen, Gift Link Created, Gift Shared (method: whatsapp / instagram / share / copy), Preview Opened, Gift Opened, Flowers Taken, Ribbon Untied, Flower Fact Viewed, Image Saved, Image Shared, Story Shared / Story Saved (tagged: true / false), Make One Back Clicked. Each gift link carries a `gift_id`, so you can see how many sent gifts got opened.
 
 Group bouquets add: Group Start Clicked (from: stall / gift / contributed / delivered / problem), Group Created, Group Viewed (role: organizer / friend), Group Flower Picked, Group Flower Added, Group Flower Removed, Group Invite Shared, Group Delivered, Group Result Shared, Group Note Viewed and Group Link Problem, all with a `group_id`. Page Viewed gets `group` and the roles `organizer` / `friend`; Gift Opened and Gift Shared get `group: true`. The viral loop to watch: invites shared per group, friends added per invite, and recipients who start one of their own.
